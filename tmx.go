@@ -198,7 +198,7 @@ func (gid GID) GlobalID() int {
 
 // IsDiagonalFlip returns true if the GID is flipped diagonally.
 func (gid GID) IsDiagonalFlip() bool {
-	if gid & FlagDiagonalFlip != 0 {
+	if gid&FlagDiagonalFlip != 0 {
 		return true
 	}
 	return false
@@ -206,7 +206,7 @@ func (gid GID) IsDiagonalFlip() bool {
 
 // IsVerticalFlip returns true if the GID is flipped vertically.
 func (gid GID) IsVerticalFlip() bool {
-	if gid & FlagVerticalFlip != 0 {
+	if gid&FlagVerticalFlip != 0 {
 		return true
 	}
 	return false
@@ -214,7 +214,7 @@ func (gid GID) IsVerticalFlip() bool {
 
 // IsHorizontalFlip returns true if the GID is flipped horizontally.
 func (gid GID) IsHorizontalFlip() bool {
-	if gid & FlagHorizontalFlip != 0 {
+	if gid&FlagHorizontalFlip != 0 {
 		return true
 	}
 	return false
@@ -222,7 +222,7 @@ func (gid GID) IsHorizontalFlip() bool {
 
 // IsFlip returns true if the GID is flipped.
 func (gid GID) IsFlip() bool {
-	if gid & FlagFlip != 0 {
+	if gid&FlagFlip != 0 {
 		return true
 	}
 	return false
