@@ -34,7 +34,7 @@ func NewFile(r io.Reader) (m *Map, err error) {
 		return nil, err
 	}
 	for _, l := range m.Layers {
-		err = l.decodeData(m.Width, m.Height)
+		err = l.Data.decode(m.Width, m.Height)
 		if err != nil {
 			return nil, err
 		}
@@ -42,51 +42,51 @@ func NewFile(r io.Reader) (m *Map, err error) {
 	return m, nil
 }
 
-// decodeData decodes the GIDs that are stored in the <data> XML-tag of a layer.
-// It will handle the various encodings and compression methods.
-func (l *Layer) decodeData(cols, rows int) (err error) {
-	if l.gids != nil {
+// decode decodes the GIDs that are stored in the <data> XML-tag of a layer. It
+// will handle the various encodings and compression methods.
+func (data *Data) decode(cols, rows int) (err error) {
+	if data.gids != nil {
 		// data has already been decoded.
 		return nil
 	}
 	// alloc
-	l.gids = make([][]GID, cols)
-	for i := range l.gids {
-		l.gids[i] = make([]GID, rows)
+	data.gids = make([][]GID, cols)
+	for i := range data.gids {
+		data.gids[i] = make([]GID, rows)
 	}
 	// decode
-	switch l.Data.Encoding {
+	switch data.Encoding {
 	case "base64":
-		err = l.decodeDataBase64(cols, rows)
+		err = data.decodeBase64(cols, rows)
 		if err != nil {
 			return err
 		}
 	case "csv":
-		err = l.decodeDataCsv(cols, rows)
+		err = data.decodeCsv(cols, rows)
 		if err != nil {
 			return err
 		}
 	case "": // XML encoding
-		err = l.decodeDataXml(cols, rows)
+		err = data.decodeXml(cols, rows)
 		if err != nil {
 			return err
 		}
 	default:
-		return fmt.Errorf("decodeData: encoding '%s' not yet implemented.", l.Data.Encoding)
+		return fmt.Errorf("decodeData: encoding '%s' not yet implemented.", data.Encoding)
 	}
 	return nil
 }
 
-// decodeDataBase64 decodes the GIDs that are stored as a base64-encoded array
-// of unsigned 32-bit integers, using little-endian byte ordering. This array
-// may be compressed using gzip or zlib.
-func (l *Layer) decodeDataBase64(cols, rows int) (err error) {
-	cleanData := strings.TrimSpace(l.Data.RawData)
+// decodeBase64 decodes the GIDs that are stored as a base64-encoded array of
+// unsigned 32-bit integers, using little-endian byte ordering. This array may
+// be compressed using gzip or zlib.
+func (data *Data) decodeBase64(cols, rows int) (err error) {
+	cleanData := strings.TrimSpace(data.RawData)
 	buf, err := base64.StdEncoding.DecodeString(cleanData)
 	if err != nil {
 		return err
 	}
-	switch l.Data.Compression {
+	switch data.Compression {
 	case "gzip":
 		r := bytes.NewBuffer(buf)
 		z, err := gzip.NewReader(r)
@@ -112,7 +112,7 @@ func (l *Layer) decodeDataBase64(cols, rows int) (err error) {
 	case "": // no compression.
 		break
 	default:
-		return fmt.Errorf("decodeDataBase64: compression '%s' not yet implemented.", l.Data.Compression)
+		return fmt.Errorf("decodeDataBase64: compression '%s' not yet implemented.", data.Compression)
 	}
 	// We should have one GID for each tile.
 	if len(buf)/4 != cols*rows {
@@ -122,7 +122,7 @@ func (l *Layer) decodeDataBase64(cols, rows int) (err error) {
 	for row := 0; row < rows; row++ {
 		for col := 0; col < cols; col++ {
 			gid := binary.LittleEndian.Uint32(buf[i*4:])
-			l.gids[col][row] = GID(gid)
+			data.gids[col][row] = GID(gid)
 			if err != nil {
 				return err
 			}
@@ -132,9 +132,9 @@ func (l *Layer) decodeDataBase64(cols, rows int) (err error) {
 	return nil
 }
 
-// decodeDataCvs decodes the GIDs that are stored as comma-separated values.
-func (l *Layer) decodeDataCsv(cols, rows int) (err error) {
-	cleanData := strings.Map(clean, l.Data.RawData)
+// decodeCvs decodes the GIDs that are stored as comma-separated values.
+func (data *Data) decodeCsv(cols, rows int) (err error) {
+	cleanData := strings.Map(clean, data.RawData)
 	rawGIDs := strings.Split(cleanData, ",")
 	// We should have one GID for each tile.
 	if len(rawGIDs) != cols*rows {
@@ -147,7 +147,7 @@ func (l *Layer) decodeDataCsv(cols, rows int) (err error) {
 			if err != nil {
 				return err
 			}
-			l.gids[col][row] = GID(gid)
+			data.gids[col][row] = GID(gid)
 			i++
 		}
 	}
@@ -163,16 +163,16 @@ func clean(r rune) rune {
 	return -1
 }
 
-// decodeDataCvs decodes the GIDs that are stored in the <tile> XML-tags' 'gid'
+// decodeXml decodes the GIDs that are stored in the <tile> XML-tags' 'gid'
 // attribute.
-func (l *Layer) decodeDataXml(cols, rows int) (err error) {
-	if len(l.Data.Tiles) != cols*rows {
-		return fmt.Errorf("decodeDataXml: wrong number of GIDs. Got %d, wanted %d.", len(l.Data.Tiles), cols*rows)
+func (data *Data) decodeXml(cols, rows int) (err error) {
+	if len(data.Tiles) != cols*rows {
+		return fmt.Errorf("decodeDataXml: wrong number of GIDs. Got %d, wanted %d.", len(data.Tiles), cols*rows)
 	}
 	i := 0
 	for row := 0; row < rows; row++ {
 		for col := 0; col < cols; col++ {
-			l.gids[col][row] = l.Data.Tiles[i].GID
+			data.gids[col][row] = data.Tiles[i].GID
 			i++
 		}
 	}
@@ -181,5 +181,5 @@ func (l *Layer) decodeDataXml(cols, rows int) (err error) {
 
 // GetGID returns the global tile ID at a given coordinate.
 func (l *Layer) GetGID(col, row int) GID {
-	return l.gids[col][row]
+	return l.Data.gids[col][row]
 }

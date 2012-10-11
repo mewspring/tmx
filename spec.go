@@ -29,7 +29,7 @@ type Map struct {
 	// Tilesets associated with the map.
 	Tilesets []Tileset `xml:"tileset"`
 	// Layers associated with the map.
-	Layers []*Layer `xml:"layer"`
+	Layers []Layer `xml:"layer"`
 	// Object layers associated with the map.
 	ObjectLayers []ObjectLayer `xml:"objectgroup"`
 }
@@ -128,9 +128,7 @@ type Layer struct {
 	//
 	// Note: Data should not be accessed directly. Use the GetGID method instead
 	// to obtain the GID at a given coordinate.
-	Data Data `xml:"data"`
-	// gids contains the decoded tile GIDs arranged by col and row.
-	gids [][]GID
+	Data *Data `xml:"data"`
 }
 
 // GID corresponds to a global tile ID.
@@ -152,6 +150,8 @@ type Data struct {
 	RawData string `xml:",innerxml"`
 	// Tiles associated with the layer.
 	Tiles []Tile `xml:"tile"`
+	// gids contains the decoded tile GIDs arranged by col and row.
+	gids [][]GID
 }
 
 // A Tile contains the GID of a single tile on a tile layer.
