@@ -1,8 +1,3 @@
-// Package tmx implements access to Tiled's tmx (Tile Map XML) files.
-//
-// Documentation and specification of the TMX file format has been based on the
-// information available at:
-//    https://github.com/bjorn/tiled/wiki/TMX-Map-Format
 package tmx
 
 const (
