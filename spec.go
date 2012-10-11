@@ -5,6 +5,13 @@
 //    https://github.com/bjorn/tiled/wiki/TMX-Map-Format
 package tmx
 
+const (
+	FlagDiagonalFlip   = 0x20000000
+	FlagVerticalFlip   = 0x40000000
+	FlagHorizontalFlip = 0x80000000
+	FlagFlip           = FlagDiagonalFlip | FlagVerticalFlip | FlagHorizontalFlip
+)
+
 // A Map contains all the map information stored in tmx files.
 //
 // The TileWidth and TileHeight properties determine the general grid size of
@@ -132,7 +139,12 @@ type Layer struct {
 }
 
 // GID corresponds to a global tile ID.
-type GID int
+//
+// Note: The highest three bits of the GID are used to store flip flags. These
+// must be cleared before using the GID as a global tile ID. Either use the
+// convenience methods or clear the flip flags manually before using the GID
+// value.
+type GID uint32
 
 // Data contains the information about the tile GIDs associated with a layer.
 //
@@ -182,8 +194,6 @@ type ObjectLayer struct {
 	// Objects associated with the object layer.
 	Objects []Object `xml:"object"`
 }
-
-/// === [ done up ] ============================================================
 
 // An Object can be positioned anywhere on the map, and is not necessarily
 // aligned to the grid.

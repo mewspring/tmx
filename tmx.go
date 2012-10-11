@@ -179,7 +179,51 @@ func (data *Data) decodeXml(cols, rows int) (err error) {
 	return nil
 }
 
-// GetGID returns the global tile ID at a given coordinate.
-func (l *Layer) GetGID(col, row int) GID {
+// GetGID returns the global tile ID at a given coordinate, after clearing the
+// flip flags.
+func (l *Layer) GetGID(col, row int) int {
+	return l.Data.gids[col][row].GlobalID()
+}
+
+// GetRawGID returns the global tile ID at a given coordinate, without clearing
+// the flip flags.
+func (l *Layer) GetRawGID(col, row int) GID {
 	return l.Data.gids[col][row]
+}
+
+// GlobalID returns the GID after clearing the flip flags.
+func (gid GID) GlobalID() int {
+	return int(gid &^ FlagFlip)
+}
+
+// IsDiagonalFlip returns true if the GID is flipped diagonally.
+func (gid GID) IsDiagonalFlip() bool {
+	if gid & FlagDiagonalFlip != 0 {
+		return true
+	}
+	return false
+}
+
+// IsVerticalFlip returns true if the GID is flipped vertically.
+func (gid GID) IsVerticalFlip() bool {
+	if gid & FlagVerticalFlip != 0 {
+		return true
+	}
+	return false
+}
+
+// IsHorizontalFlip returns true if the GID is flipped horizontally.
+func (gid GID) IsHorizontalFlip() bool {
+	if gid & FlagHorizontalFlip != 0 {
+		return true
+	}
+	return false
+}
+
+// IsFlip returns true if the GID is flipped.
+func (gid GID) IsFlip() bool {
+	if gid & FlagFlip != 0 {
+		return true
+	}
+	return false
 }
