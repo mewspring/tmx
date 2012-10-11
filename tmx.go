@@ -187,7 +187,7 @@ func (data *Data) decodeXml(cols, rows int) (err error) {
 // GetGID returns the global tile ID at a given coordinate, after clearing the
 // flip flags.
 func (l *Layer) GetGID(col, row int) int {
-	return l.Data.gids[col][row].GlobalID()
+	return l.Data.gids[col][row].GlobalTileID()
 }
 
 // GetRawGID returns the global tile ID at a given coordinate, without clearing
@@ -196,8 +196,8 @@ func (l *Layer) GetRawGID(col, row int) GID {
 	return l.Data.gids[col][row]
 }
 
-// GlobalID returns the GID after clearing the flip flags.
-func (gid GID) GlobalID() int {
+// GlobalTileID returns the GID after clearing the flip flags.
+func (gid GID) GlobalTileID() int {
 	return int(gid &^ FlagFlip)
 }
 

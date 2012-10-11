@@ -212,7 +212,7 @@ type Object struct {
 	// GID is a reference to a global tile ID.
 	//
 	// When the object has a GID set, then it is represented by the image of the
-	// tile with that global ID. Currently that means Width and Height are
+	// tile with that global tile ID. Currently that means Width and Height are
 	// ignored for such objects. The image alignment currently depends on the map
 	// orientation. In orthogonal orientation it's aligned to the bottom-left
 	// while in isometric it's aligned to the bottom-center.
