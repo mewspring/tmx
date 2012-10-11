@@ -1,5 +1,6 @@
 package tmx
 
+// Flip flags stored in the highest three bits of the GID.
 const (
 	FlagDiagonalFlip   = 0x20000000
 	FlagVerticalFlip   = 0x40000000
