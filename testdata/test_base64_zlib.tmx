@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="isometric" width="15" height="15" tilewidth="64" tileheight="32">
+ <tileset firstgid="1" name="tiled_dungeon" tilewidth="64" tileheight="128">
+  <image source="tiled_dungeon.png" width="1024" height="1920"/>
+ </tileset>
+ <tileset firstgid="241" name="stairs" tilewidth="256" tileheight="256">
+  <tileoffset x="0" y="48"/>
+  <image source="stairs.png" width="1024" height="256"/>
+ </tileset>
+ <layer name="floor" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxdk1sOhSAQQ0dhCyLIw7v/VV5MTsOEjwacRxlKLWYWJ8rEOZEmHhD4rhO/iRvkiT5xUReJNdaTeKP34xhw6KxIrML5rQd93dUF4l/+dTN016/ZM7ECT2WGg1n7lk/kA/nIjJkzLuoHHMnFM/UVBGaoxG+nTSRf6XuofeFVbXba6I5f3pjzdrMWp0l3ummf6Bv0BHiPjVt3re5eaeNpnHe4N2poVZym6tX3yf6x5Z9BXDpr5ouY/Cdvpe1ddKbukh3kk+jm/rl3em35UXpc9ElH6ZFteU8+zLb+BXlKMflD/82w5XGDU16U9hUt/nt5EXc=
+  </data>
+ </layer>
+ <layer name="objects" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAcTKZA7woq2L8Yh3gbFcxGBxuJULOECDXlUHoZifaXIuklB1CiFwQWUaifWNACpRdikVtKpF5c4DOF+qkNADL+CqE=
+  </data>
+ </layer>
+ <layer name="walls" width="15" height="15">
+  <data encoding="base64" compression="zlib">
+   eJyzY2BgMALiGDTangEC7IA4CogjgDgESsPkDRmwA2sgTgJiKxzyzkAciUOOEADpDRwgvbj8S4xeWyC2JFGfDxAHQNmxZNgJAqD4wxUPuIA3EPsDcSiJ+pDtpiSswinQS4mbcaVJUDy4ALEnHr22UDXoGBZ/vnjkAfyWEaU=
+  </data>
+ </layer>
+ <objectgroup name="events" width="15" height="15">
+  <object type="teleport" x="224" y="32" width="32" height="32"/>
+  <object type="teleport" x="288" y="288" width="128" height="32"/>
+ </objectgroup>
+</map>
