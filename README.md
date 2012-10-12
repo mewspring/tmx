@@ -7,6 +7,15 @@ the map editor [Tiled][].
 [tmx]: https://github.com/bjorn/tiled/wiki/TMX-Map-Format
 [Tiled]: https://github.com/bjorn/tiled/
 
+documentation
+-------------
+
+Documentation provided by GoPkgDoc:
+
+   - [tmx][]
+
+[tmx]: http://go.pkgdoc.org/github.com/mewmew/tmx
+
 public domain
 -------------
 
