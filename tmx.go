@@ -5,7 +5,6 @@
 //    https://github.com/bjorn/tiled/wiki/TMX-Map-Format
 package tmx
 
-import "bytes"
 import "compress/gzip"
 import "compress/zlib"
 import "encoding/base64"
@@ -86,51 +85,38 @@ func (data *Data) decode(cols, rows int) (err error) {
 // unsigned 32-bit integers, using little-endian byte ordering. This array may
 // be compressed using gzip or zlib.
 func (data *Data) decodeBase64(cols, rows int) (err error) {
-	cleanData := strings.TrimSpace(data.RawData)
-	buf, err := base64.StdEncoding.DecodeString(cleanData)
-	if err != nil {
-		return err
-	}
+	s := strings.TrimSpace(data.RawData)
+	r := base64.NewDecoder(base64.StdEncoding, strings.NewReader(s))
 	switch data.Compression {
 	case "gzip":
-		r := bytes.NewBuffer(buf)
 		z, err := gzip.NewReader(r)
 		if err != nil {
 			return err
 		}
 		defer z.Close()
-		buf, err = ioutil.ReadAll(z)
-		if err != nil {
-			return err
-		}
+		r = z
 	case "zlib":
-		r := bytes.NewBuffer(buf)
 		z, err := zlib.NewReader(r)
 		if err != nil {
 			return err
 		}
 		defer z.Close()
-		buf, err = ioutil.ReadAll(z)
-		if err != nil {
-			return err
-		}
+		r = z
 	case "": // no compression.
 		break
 	default:
-		return fmt.Errorf("decodeDataBase64: compression '%s' not yet implemented.", data.Compression)
+		return fmt.Errorf("decodeBase64: compression '%s' not yet implemented.", data.Compression)
 	}
+	buf, err := ioutil.ReadAll(r)
 	// We should have one GID for each tile.
 	if len(buf)/4 != cols*rows {
-		return fmt.Errorf("decodeDataBase64: wrong number of GIDs. Got %d, wanted %d.", len(buf)/4, cols*rows)
+		return fmt.Errorf("decodeBase64: wrong number of GIDs. Got %d, wanted %d.", len(buf)/4, cols*rows)
 	}
 	i := 0
 	for row := 0; row < rows; row++ {
 		for col := 0; col < cols; col++ {
 			gid := binary.LittleEndian.Uint32(buf[i*4:])
 			data.gids[col][row] = GID(gid)
-			if err != nil {
-				return err
-			}
 			i++
 		}
 	}
@@ -143,7 +129,7 @@ func (data *Data) decodeCsv(cols, rows int) (err error) {
 	rawGIDs := strings.Split(cleanData, ",")
 	// We should have one GID for each tile.
 	if len(rawGIDs) != cols*rows {
-		return fmt.Errorf("decodeDataCsv: wrong number of GIDs. Got %d, wanted %d.", len(rawGIDs), cols*rows)
+		return fmt.Errorf("decodeCsv: wrong number of GIDs. Got %d, wanted %d.", len(rawGIDs), cols*rows)
 	}
 	i := 0
 	for row := 0; row < rows; row++ {
@@ -172,7 +158,7 @@ func clean(r rune) rune {
 // attribute.
 func (data *Data) decodeXml(cols, rows int) (err error) {
 	if len(data.Tiles) != cols*rows {
-		return fmt.Errorf("decodeDataXml: wrong number of GIDs. Got %d, wanted %d.", len(data.Tiles), cols*rows)
+		return fmt.Errorf("decodeXml: wrong number of GIDs. Got %d, wanted %d.", len(data.Tiles), cols*rows)
 	}
 	i := 0
 	for row := 0; row < rows; row++ {
