@@ -19,13 +19,13 @@ type Map struct {
 	// Map orientation. Tiled supports "orthogonal" and "isometric" at the
 	// moment.
 	Orientation string `xml:"orientation,attr"`
-	// The map width in tiles.
+	// The map width (cols) in tiles.
 	Width int `xml:"width,attr"`
-	// The map height in tiles.
+	// The map height (rows) in tiles.
 	Height int `xml:"height,attr"`
-	// The width of a tile.
+	// The width in pixels of a tile.
 	TileWidth int `xml:"tilewidth,attr"`
-	// The height of a tile.
+	// The height in pixels of a tile.
 	TileHeight int `xml:"tileheight,attr"`
 	// Properties associated with the map.
 	Properties []Property `xml:"properties>property"`
