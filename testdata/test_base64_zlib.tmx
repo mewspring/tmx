@@ -14,12 +14,7 @@
  </layer>
  <layer name="objects" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYKAcTKZA7woq2L8Yh3gbFcxGBxuJULOECDXlUHoZifaXIuklB1CiFwQWUaifWNACpRdikVtKpF5c4DOF+qkNADL+CqE=
-  </data>
- </layer>
- <layer name="walls" width="15" height="15">
-  <data encoding="base64" compression="zlib">
-   eJyzY2BgMALiGDTangEC7IA4CogjgDgESsPkDRmwA2sgTgJiKxzyzkAciUOOEADpDRwgvbj8S4xeWyC2JFGfDxAHQNmxZNgJAqD4wxUPuIA3EPsDcSiJ+pDtpiSswinQS4mbcaVJUDy4ALEnHr22UDXoGBZ/vnjkAfyWEaU=
+   eJyzY2BgMALiGDTangEC7IA4CogjgDgESsPkDaFqJjOgAmsgTgJiKwbswBmII6HsFTjU4AIgvYFoYotxqG0jQi8p9oL8u5EItUuw6LUFYksksXIovQyPOT5AHABlx0LpUiS9+IAzlAbFH3I8EKPXG4j9gTgUi9wiIu02JKgKt95wIG6B8hdiUbMUj95QJL24wGccemFpEl0/KB5cgNgTj722UDXoGBZ/vnjkASwfHEU=
   </data>
  </layer>
  <objectgroup name="events" width="15" height="15">
