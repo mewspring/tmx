@@ -14,7 +14,7 @@ Documentation provided by GoPkgDoc:
 
    - [tmx][]
 
-[tmx]: http://go.pkgdoc.org/github.com/mewmew/tmx
+[tmx]: http://godoc.org/github.com/mewmew/tmx
 
 public domain
 -------------
