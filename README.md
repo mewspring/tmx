@@ -10,7 +10,7 @@ the map editor [Tiled][].
 documentation
 -------------
 
-Documentation provided by GoPkgDoc:
+Documentation provided by GoDoc:
 
    - [tmx][]
 
