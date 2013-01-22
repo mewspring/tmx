@@ -1,13 +1,13 @@
 tmx
 ===
 
-This package provides support for reading [tmx][] (Tile Map XML) files, used by
+This package provides support for reading [tmx][1] (Tile Map XML) files, used by
 the map editor [Tiled][].
 
-[tmx]: https://github.com/bjorn/tiled/wiki/TMX-Map-Format
+[1]: https://github.com/bjorn/tiled/wiki/TMX-Map-Format
 [Tiled]: https://github.com/bjorn/tiled/
 
-documentation
+Documentation
 -------------
 
 Documentation provided by GoDoc:
