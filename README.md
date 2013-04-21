@@ -16,6 +16,17 @@ Documentation provided by GoDoc.
 
 [tmx]: http://godoc.org/github.com/mewmew/tmx
 
+Examples
+--------
+
+tmxview creates image representations of [tmx][] maps.
+
+	go get github.com/mewmew/tmx/examples/mapview/cmd/tmxview
+	cd $GOPATH/src/github.com/mewmew/tmx/testdata
+	tmxview test_csv.tmx
+
+![Screenshot - tmxview](https://github.com/mewmew/tmx/blob/master/examples/mapview/cmd/tmxview/view.png?raw=true)
+
 public domain
 -------------
 
