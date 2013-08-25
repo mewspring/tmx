@@ -73,7 +73,7 @@ func (data *Data) decode(cols, rows int) (err error) {
 			return err
 		}
 	case "": // XML encoding
-		err = data.decodeXml(cols, rows)
+		err = data.decodeXML(cols, rows)
 		if err != nil {
 			return err
 		}
@@ -156,11 +156,11 @@ func clean(r rune) rune {
 	return -1
 }
 
-// decodeXml decodes the GIDs that are stored in the <tile> XML-tags' 'gid'
+// decodeXML decodes the GIDs that are stored in the <tile> XML-tags' 'gid'
 // attribute.
-func (data *Data) decodeXml(cols, rows int) (err error) {
+func (data *Data) decodeXML(cols, rows int) (err error) {
 	if len(data.Tiles) != cols*rows {
-		return fmt.Errorf("decodeXml: wrong number of GIDs. Got %d, wanted %d.", len(data.Tiles), cols*rows)
+		return fmt.Errorf("decodeXML: wrong number of GIDs. Got %d, wanted %d.", len(data.Tiles), cols*rows)
 	}
 	i := 0
 	for row := 0; row < rows; row++ {

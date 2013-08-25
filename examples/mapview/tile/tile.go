@@ -28,11 +28,11 @@ func NewTileset() (tileset Tileset) {
 /// ### [/ todo ] ###
 
 // AddTiles adds tiles to the tileset based on a provided sprite sheet, using
-// startId as the first tile id.
+// startID as the first tile id.
 //
 // Note: If possible the added tiles will share pixels with the provided sprite
 // sheet.
-func (tileset Tileset) AddTiles(spriteSheet image.Image, startId, tileWidth, tileHeight int, tileOffset image.Point) {
+func (tileset Tileset) AddTiles(spriteSheet image.Image, startID, tileWidth, tileHeight int, tileOffset image.Point) {
 	sub, ok := spriteSheet.(subImager)
 	if !ok {
 		sub = &subFallback{
@@ -40,7 +40,7 @@ func (tileset Tileset) AddTiles(spriteSheet image.Image, startId, tileWidth, til
 		}
 	}
 	r := sub.Bounds()
-	id := startId
+	id := startID
 	for y := r.Min.Y; y < r.Max.Y; y += tileHeight {
 		for x := r.Min.X; x < r.Max.X; x += tileWidth {
 			tileRect := image.Rect(x, y, x+tileWidth, y+tileHeight)

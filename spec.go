@@ -88,8 +88,8 @@ type TileOffset struct {
 	Y int `xml:"y,attr"`
 }
 
-// A single image is associated with each tileset. It is cut into smaller tiles
-// based on the attributes defined in the tileset.
+// An Image is associated with each tileset. It is cut into smaller tiles based
+// on the attributes defined in the tileset.
 type Image struct {
 	// Source refers to the tileset image file.
 	Source string `xml:"source,attr"`
@@ -106,7 +106,7 @@ type Image struct {
 // TileInfo contains information about a tile within a tileset.
 type TileInfo struct {
 	// The local tile ID within its tileset.
-	Id int `xml:"id,attr"`
+	ID int `xml:"id,attr"`
 	// Properties associated with the tile.
 	Properties []Property `xml:"properties>property"`
 }
@@ -116,8 +116,8 @@ type TileInfo struct {
 ///   - Opacity: default value 1.0
 /// ### [/ todo ] ###
 
-// A Map can contain any number of layers. Each layer contains information about
-// which global tile ID any given coordinate has.
+// A Layer contains information about which global tile ID any given coordinate
+// has. A Map can contain any number of layers.
 type Layer struct {
 	// The name of the layer.
 	Name string `xml:"name,attr"`
@@ -172,8 +172,8 @@ type Tile struct {
 ///   - Visible: default value true
 /// ### [/ todo ] ###
 
-// A Map can contain any number of object layers. Each object layer contains
-// information about different objects on the map.
+// An ObjectLayer contains information about different objects on the map. A Map
+// can contain any number of object layers.
 //
 // While tile layers are very suitable for anything repetitive aligned to the
 // tile grid, sometimes you want to annotate your map with other information,
