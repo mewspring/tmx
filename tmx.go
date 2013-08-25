@@ -5,17 +5,19 @@
 //    https://github.com/bjorn/tiled/wiki/TMX-Map-Format
 package tmx
 
-import "compress/gzip"
-import "compress/zlib"
-import "encoding/base64"
-import "encoding/binary"
-import "encoding/xml"
-import "fmt"
-import "io"
-import "io/ioutil"
-import "os"
-import "strconv"
-import "strings"
+import (
+	"compress/gzip"
+	"compress/zlib"
+	"encoding/base64"
+	"encoding/binary"
+	"encoding/xml"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"os"
+	"strconv"
+	"strings"
+)
 
 // Open reads the provided tmx file and returns a parsed Map, based on the TMX
 // file format.
