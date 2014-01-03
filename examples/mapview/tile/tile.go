@@ -3,7 +3,8 @@ package tile
 
 import (
 	"image"
-	"image/draw"
+
+	"github.com/mewkiz/pkg/imgutil"
 )
 
 // Tileset is a map from a tile ID to a tile image.
@@ -33,12 +34,7 @@ func NewTileset() (tileset Tileset) {
 // Note: If possible the added tiles will share pixels with the provided sprite
 // sheet.
 func (tileset Tileset) AddTiles(spriteSheet image.Image, startID, tileWidth, tileHeight int, tileOffset image.Point) {
-	sub, ok := spriteSheet.(subImager)
-	if !ok {
-		sub = &subFallback{
-			Image: spriteSheet,
-		}
-	}
+	sub := imgutil.SubFallback(spriteSheet)
 	r := sub.Bounds()
 	id := startID
 	for y := r.Min.Y; y < r.Max.Y; y += tileHeight {
@@ -52,25 +48,4 @@ func (tileset Tileset) AddTiles(spriteSheet image.Image, startID, tileWidth, til
 			id++
 		}
 	}
-}
-
-// subImager is an interface that adds the SubImage method to the image.Image
-// interface.
-type subImager interface {
-	image.Image
-	SubImage(r image.Rectangle) image.Image
-}
-
-// subFallback provides a SubImage method for images that lacks it.
-type subFallback struct {
-	image.Image
-}
-
-// SubImage returns an image representing the portion of the image src visible
-// through r. The returned value doesn't shares pixels with the original image.
-func (src *subFallback) SubImage(r image.Rectangle) image.Image {
-	dstRect := image.Rect(0, 0, r.Dx(), r.Dy())
-	dst := image.NewRGBA(dstRect)
-	draw.Draw(dst, dstRect, src, r.Min, draw.Over)
-	return dst
 }
