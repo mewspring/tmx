@@ -1,4 +1,5 @@
-// Package mapview implements functions for drawing image representations of tmx maps.
+// Package mapview implements functions for drawing image representations of tmx
+// maps.
 package mapview
 
 import (
