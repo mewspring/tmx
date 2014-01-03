@@ -29,6 +29,9 @@ type View struct {
 	layers []tmx.Layer
 	// tileset is a map from a tile ID to a tile image.
 	tileset tile.Tileset
+	// isOrtho is true if the map is orthogonal and false if the map is
+	// isometric.
+	isOrtho bool
 }
 
 // NewView returns a new view of the map. The tileset sprite sheet is loaded
@@ -42,10 +45,19 @@ func NewView(m *tmx.Map, dir string) (view *View, err error) {
 		delta:      getDelta(m),
 		layers:     m.Layers,
 	}
-	// Each map is (cols+rows)/2 number of tiles in width and height.
-	i := (view.cols + view.rows) / 2
-	width := i * view.tileWidth
-	height := i*view.tileHeight + view.delta
+	if m.Orientation == "orthogonal" {
+		view.isOrtho = true
+	}
+	var width, height int
+	if view.isOrtho {
+		width = view.cols * view.tileWidth
+		height = view.rows*view.tileHeight + view.delta
+	} else {
+		// Each map is (cols+rows)/2 number of tiles in width and height.
+		i := (view.cols + view.rows) / 2
+		width = i * view.tileWidth
+		height = i*view.tileHeight + view.delta
+	}
 	view.Image = image.NewRGBA(image.Rect(0, 0, width, height))
 	view.tileset, err = GetTileset(m, dir)
 	if err != nil {
@@ -96,19 +108,28 @@ func (view *View) GetCellRect(col, row int) image.Rectangle {
 	halfTileWidth := view.tileWidth / 2
 	halfTileHeight := view.tileHeight / 2
 
-	// X offset to cell (0, 0):
-	x := (view.rows - 1) * halfTileWidth
-	// Adjust x offset based on col:
-	x += col * halfTileWidth
-	// Adjust x offset based on row:
-	x -= row * halfTileWidth
+	var x, y int
+	if view.isOrtho {
+		// X offset to cell:
+		x = (col - 1) * view.tileWidth
 
-	// Y offset to cell (0, 0):
-	y := 0
-	// Adjust y offset based on col:
-	y += col * halfTileHeight
-	// Adjust y offset based on row:
-	y += row * halfTileHeight
+		// X offset to cell:
+		y = (row - 1) * view.tileHeight
+	} else {
+		// X offset to cell (0, 0):
+		x = (view.rows - 1) * halfTileWidth
+		// Adjust x offset based on col:
+		x += col * halfTileWidth
+		// Adjust x offset based on row:
+		x -= row * halfTileWidth
+
+		// Y offset to cell (0, 0):
+		y = 0
+		// Adjust y offset based on col:
+		y += col * halfTileHeight
+		// Adjust y offset based on row:
+		y += row * halfTileHeight
+	}
 
 	return image.Rect(x, y, x+view.tileWidth, y+view.tileHeight)
 }
