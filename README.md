@@ -12,7 +12,7 @@ Documentation
 
 Documentation provided by GoDoc.
 
-   - [tmx][]
+   - [tmx][]: implements access to Tiled's tmx (Tile Map XML) files.
 
 [tmx]: http://godoc.org/github.com/mewmew/tmx
 
