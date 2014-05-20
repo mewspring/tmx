@@ -33,3 +33,10 @@ public domain
 This code is hereby released into the *[public domain][]*.
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/
+
+license
+-------
+
+The tilesets are part of the [Flare][] project and are licensed CC-BY-SA 3.0.
+
+[Flare]: http://flarerpg.org/
