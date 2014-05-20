@@ -37,6 +37,7 @@ This code is hereby released into the *[public domain][]*.
 license
 -------
 
-The tilesets in `testdata/` are part of the [Flare][] project and are licensed CC-BY-SA 3.0.
+The tilesets in `testdata/` are part of the [Flare][] project and are licensed
+CC-BY-SA 3.0.
 
 [Flare]: http://flarerpg.org/
