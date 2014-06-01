@@ -4,7 +4,7 @@ mapview creates image representations of tmx maps.
 
 Installation:
 
-	$ go get github.com/mewmew/tmx/examples/mapview/cmd/mapview
+	go get github.com/mewmew/tmx/examples/mapview/cmd/mapview
 
 Documentation:
 
@@ -23,8 +23,8 @@ Flags:
 
 Examples:
 
-1. Create png image of tmx map.
-	$ mapview -o map.png map.tmx
+1. Create a png image of a tmx map.
+	mapview -o map.png map.tmx
 
 */
 package main

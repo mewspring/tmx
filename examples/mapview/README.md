@@ -24,7 +24,7 @@ tmxview creates image representations of [tmx][] maps.
 Installation
 ------------
 
-	$ go get github.com/mewmew/tmx/examples/mapview/cmd/tmxview
+	go get github.com/mewmew/tmx/examples/mapview/cmd/tmxview
 
 Documentation
 -------------
@@ -48,9 +48,9 @@ Flags:
 Examples
 --------
 
-1. Create png image of tmx map.
+1. Create a png image of a tmx map.
 
-		$ tmxview -o map.png map.tmx
+		tmxview -o map.png map.tmx
 
 public domain
 -------------
