@@ -1,6 +1,10 @@
 tmx
 ===
 
+[![Build Status](https://travis-ci.org/mewmew/tmx.svg?branch=master)](https://travis-ci.org/mewmew/tmx)
+[![Coverage Status](https://img.shields.io/coveralls/mewmew/tmx.svg)](https://coveralls.io/r/mewmew/tmx?branch=master)
+[![GoDoc](https://godoc.org/github.com/mewmew/tmx?status.svg)](https://godoc.org/github.com/mewmew/tmx)
+
 This package provides support for reading [tmx][1] (Tile Map XML) files, used by
 the map editor [Tiled][].
 
