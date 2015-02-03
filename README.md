@@ -1,47 +1,38 @@
-tmx
-===
+# tmx
 
 [![Build Status](https://travis-ci.org/mewmew/tmx.svg?branch=master)](https://travis-ci.org/mewmew/tmx)
 [![Coverage Status](https://img.shields.io/coveralls/mewmew/tmx.svg)](https://coveralls.io/r/mewmew/tmx?branch=master)
 [![GoDoc](https://godoc.org/github.com/mewmew/tmx?status.svg)](https://godoc.org/github.com/mewmew/tmx)
 
-This package provides support for reading [tmx][1] (Tile Map XML) files, used by
-the map editor [Tiled][].
+The tmx project provides support for reading [tmx][1] (Tile Map XML) files, used by the map editor [Tiled](https://github.com/bjorn/tiled/).
 
 [1]: https://github.com/bjorn/tiled/wiki/TMX-Map-Format
-[Tiled]: https://github.com/bjorn/tiled/
 
-Documentation
--------------
+## Documentation
 
 Documentation provided by GoDoc.
 
-   - [tmx][]: implements access to Tiled's tmx (Tile Map XML) files.
+- [tmx]: implements access to Tiled's tmx (Tile Map XML) files.
 
 [tmx]: http://godoc.org/github.com/mewmew/tmx
 
-Examples
---------
+## Examples
 
-tmxview creates image representations of [tmx][] maps.
+The `tmxview` command creates image representations of tmx maps.
 
-	go get github.com/mewmew/tmx/examples/mapview/cmd/tmxview
-	cd $GOPATH/src/github.com/mewmew/tmx/testdata
-	tmxview test_csv.tmx
+    go get github.com/mewmew/tmx/examples/mapview/cmd/tmxview
+    cd $GOPATH/src/github.com/mewmew/tmx/testdata
+    tmxview test_csv.tmx
 
 ![Screenshot - tmxview](https://github.com/mewmew/tmx/blob/master/examples/mapview/cmd/tmxview/view.png?raw=true)
 
-public domain
--------------
+## Public domain
 
-This code is hereby released into the *[public domain][]*.
+The source code and any original content of this repository is hereby released into the [public domain].
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/
 
-license
--------
+## License
 
-The tilesets in `testdata/` are part of the [Flare][] project and are licensed
-CC-BY-SA 3.0.
+The tilesets in `testdata/` are part of the [Flare](http://flarerpg.org/) project and are licensed CC-BY-SA 3.0.
 
-[Flare]: http://flarerpg.org/
