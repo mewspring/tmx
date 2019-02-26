@@ -4,8 +4,8 @@ import "image"
 
 import (
 	"github.com/mewkiz/pkg/imgutil"
-	"github.com/mewmew/tmx"
-	"github.com/mewmew/tmx/examples/mapview/tile"
+	"github.com/mewspring/tmx"
+	"github.com/mewspring/tmx/examples/mapview/tile"
 )
 
 // GetTileset returns the combined tileset of a given tmx map.

@@ -4,13 +4,13 @@ mapview creates image representations of tmx maps.
 
 Installation:
 
-	go get github.com/mewmew/tmx/examples/mapview/cmd/mapview
+	go get github.com/mewspring/tmx/examples/mapview/cmd/mapview
 
 Documentation:
 
 Documentation provided by GoDoc.
 
-http://godoc.org/github.com/mewmew/tmx/examples/mapview/cmd/mapview
+http://godoc.org/github.com/mewspring/tmx/examples/mapview/cmd/mapview
 
 Usage:
 

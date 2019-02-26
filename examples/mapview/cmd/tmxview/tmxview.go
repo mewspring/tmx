@@ -8,8 +8,8 @@ import (
 	"path"
 
 	"github.com/mewkiz/pkg/imgutil"
-	"github.com/mewmew/tmx"
-	"github.com/mewmew/tmx/examples/mapview"
+	"github.com/mewspring/tmx"
+	"github.com/mewspring/tmx/examples/mapview"
 )
 
 // pngPath is the path to the output png image.

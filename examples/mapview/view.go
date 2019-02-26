@@ -6,8 +6,8 @@ import (
 	"image"
 	"image/draw"
 
-	"github.com/mewmew/tmx"
-	"github.com/mewmew/tmx/examples/mapview/tile"
+	"github.com/mewspring/tmx"
+	"github.com/mewspring/tmx/examples/mapview/tile"
 )
 
 // A View corresponds to an image representation of a map.
